@@ -52,7 +52,8 @@ class FooterSection extends StatelessWidget {
 }
 
 /// FlyRank AI Internship — verified credential badge.
-/// Links out to the official verification page for this credential ID.
+/// Restyled to match the site's dark / rose glass-panel identity
+/// (instead of the default white card) so it sits naturally in the footer.
 class _FlyRankBadge extends StatelessWidget {
   const _FlyRankBadge();
 
@@ -72,23 +73,31 @@ class _FlyRankBadge extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFFFFF),
+              color: Brand.surface(0.72),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFDDE4E7)),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF051F21).withOpacity(0.05),
-                  blurRadius: 2,
-                  offset: const Offset(0, 1),
-                ),
-              ],
+              border: Border.all(color: Brand.roseSoft.withOpacity(0.18)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomPaint(
-                  size: const Size(40, 40),
-                  painter: _FlyRankMarkPainter(),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Brand.rose.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Brand.rose.withOpacity(0.3)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'y',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: Brand.rose,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 14),
                 Column(
@@ -101,16 +110,16 @@ class _FlyRankBadge extends StatelessWidget {
                         fontSize: 9,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.4,
-                        color: const Color(0xFF051F21).withOpacity(0.5),
+                        color: Brand.muted,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Verified credential',
                       style: GoogleFonts.inter(
-                        fontSize: 15,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF051F21),
+                        color: Brand.cream,
                         letterSpacing: -0.1,
                       ),
                     ),
@@ -118,37 +127,33 @@ class _FlyRankBadge extends StatelessWidget {
                     Text(
                       'FR-D1-T668H-R789R',
                       style: GoogleFonts.spaceMono(
-                        fontSize: 11,
-                        color: const Color(0xFF1A7A4A),
+                        fontSize: 10.5,
+                        color: Brand.roseSoft,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF54E399).withOpacity(0.12),
+                    color: Brand.rose.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(9999),
-                    border: Border.all(
-                      color: const Color(0xFF54E399).withOpacity(0.28),
-                    ),
+                    border: Border.all(color: Brand.rose.withOpacity(0.3)),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
-                        Icons.check_circle_outline,
-                        size: 13,
-                        color: Color(0xFF1A7A4A),
-                      ),
+                      Icon(Icons.check_circle_outline,
+                          size: 13, color: Brand.roseSoft),
                       const SizedBox(width: 6),
                       Text(
                         'Verify',
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF1A7A4A),
+                          color: Brand.roseSoft,
                         ),
                       ),
                     ],
@@ -161,76 +166,4 @@ class _FlyRankBadge extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Paints the FlyRank checkmark/bird mark from the original SVG:
-/// a dark rounded-square background with the green flourish glyph on top.
-class _FlyRankMarkPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final scale = size.width / 96;
-
-    final bgPaint = Paint()..color = const Color(0xFF051F21);
-    final bgRRect = RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Radius.circular(22 * scale),
-    );
-    canvas.drawRRect(bgRRect, bgPaint);
-
-    final glyphPath = Path()
-      ..moveTo(28.2354 * scale, 74.2202 * scale)
-      ..lineTo(28.2354 * scale, 67.9039 * scale)
-      ..cubicTo(
-        29.6419 * scale, 68.4369 * scale,
-        31.3724 * scale, 68.7055 * scale,
-        33.4311 * scale, 68.7055 * scale,
-      )
-      ..cubicTo(
-        35.3235 * scale, 68.7055 * scale,
-        36.8153 * scale, 68.2396 * scale,
-        37.8979 * scale, 67.3079 * scale,
-      )
-      ..cubicTo(
-        38.9805 * scale, 66.3762 * scale,
-        39.9566 * scale, 64.8695 * scale,
-        40.8218 * scale, 62.792 * scale,
-      )
-      ..lineTo(42.6887 * scale, 58.3139 * scale)
-      ..lineTo(29.8976 * scale, 29.2879 * scale)
-      ..cubicTo(
-        35.0038 * scale, 29.2879 * scale,
-        39.6028 * scale, 32.3307 * scale,
-        41.5294 * scale, 36.9893 * scale,
-      )
-      ..lineTo(47.0746 * scale, 50.3985 * scale)
-      ..lineTo(56.0126 * scale, 28.6038 * scale)
-      ..cubicTo(
-        57.9221 * scale, 23.9452 * scale,
-        62.5168 * scale, 20.894 * scale,
-        67.6187 * scale, 20.894 * scale,
-      )
-      ..lineTo(50.0795 * scale, 63.5936 * scale)
-      ..cubicTo(
-        48.4556 * scale, 67.5933 * scale,
-        46.5205 * scale, 70.5102 * scale,
-        44.2743 * scale, 72.3484 * scale,
-      )
-      ..cubicTo(
-        42.0281 * scale, 74.1867 * scale,
-        39.1169 * scale, 75.1058 * scale,
-        35.5451 * scale, 75.1058 * scale,
-      )
-      ..cubicTo(
-        32.6212 * scale, 75.1058 * scale,
-        30.1875 * scale, 74.812 * scale,
-        28.2354 * scale, 74.2244 * scale,
-      )
-      ..close();
-
-    final glyphPaint = Paint()..color = const Color(0xFF54E399);
-    canvas.drawPath(glyphPath, glyphPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
